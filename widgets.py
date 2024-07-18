@@ -19,7 +19,7 @@ class XSgin(Label):
         kwargs.setdefault("font", ("Aryal", 25, 'bold'))
         super().__init__(master, **kwargs)
 
-    
+
 
 def matrices_frame(master:Tk) -> Frame:
     _matrices_frame = Frame(master)
@@ -33,4 +33,4 @@ def matrices_frame(master:Tk) -> Frame:
     matrix_num1.pack(side=LEFT)
     x_sign.pack(side=LEFT)
     matrix_num2.pack(side=LEFT)
-    return _matrices_frame
+    return _matrices_frame, matrix_1, matrix_2
