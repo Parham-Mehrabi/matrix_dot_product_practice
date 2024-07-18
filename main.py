@@ -1,27 +1,7 @@
-from tkinter import Tk, Label, OptionMenu, StringVar, Button, Checkbutton, BooleanVar
+from tkinter import Tk, OptionMenu, StringVar, Button, Checkbutton, BooleanVar
 from colors import BACK_GROUND_COLOR_1
-
-
-
-class Shape:
-    def __init__(self, row, col) -> None:
-        self.row = row
-        self.col = col
-    
-    def __str__(self) -> str:
-        return f"{self.row} x {self.col}"
-    
-    def __repr__(self) -> str:
-        return f"{self.row} x {self.col}" 
-
-matrices = [Shape(i, j) for j in range(1, 6) for i in range(1, 8)]
-
-
-class Label(Label):
-    def __init__(self, master, **kwargs):
-        kwargs.setdefault("bg", BACK_GROUND_COLOR_1)
-        super().__init__(master, **kwargs)
-
+from widgets import BlueLabel
+from utils import matrices
 
 
 def main():
@@ -29,7 +9,7 @@ def main():
     root.title('matrices practice')
     root.geometry("800x620+100+100")
     root.config({"bg": BACK_GROUND_COLOR_1})
-    Label(root, text="select difficulty").pack()
+    BlueLabel(root, text="select difficulty").pack()
     matrix_1 = StringVar()
     matrix_1.set("select the first matrix")
     matrix_num1 = OptionMenu(root, matrix_1, *matrices)
