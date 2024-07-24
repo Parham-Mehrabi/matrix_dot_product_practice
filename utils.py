@@ -22,7 +22,11 @@ def create_random_matrices(m1, m2, zeros, negative) -> Tuple[np.ndarray, np.ndar
 
     return matrix_1, matrix_2
 
+created_questions = []
+
 def handle_generate(m1, m2, zeros, negative, main_window):
+    global created_questions
+
     if len(m1) > 5 or len(m2) > 5:
         return messagebox.showerror("select both shapes", "select both matrices shapes")
 
@@ -30,9 +34,20 @@ def handle_generate(m1, m2, zeros, negative, main_window):
         return messagebox.showerror("Invalide shapes", f"you cannot multiply a matrix with shape {m1} to a matrix with shape {m2}")
     
     matrix_1, matrix_2 = create_random_matrices(m1, m2, zeros, negative)
-    MatrixFrame(main_window, matrix_1).pack(side=LEFT, padx=15)
-    XSign(main_window, fg=RED).pack(side=LEFT, padx=5)
-    MatrixFrame(main_window, matrix_2).pack(side=LEFT, padx=15)
-    EqualSign(main_window, fg=RED).pack(side=LEFT, padx=5)
+
+    for widget in created_questions:
+        widget.destroy()
+
+    m1f = MatrixFrame(main_window, matrix_1)
+    xs = XSign(main_window, fg=RED)
+    m2f = MatrixFrame(main_window, matrix_2)
+    es = EqualSign(main_window, fg=RED)
     answer_matrix = matrix_1.dot(matrix_2)
-    AnswerFrame(main_window, answer_matrix).pack(side=LEFT, padx=15)
+    af = AnswerFrame(main_window, answer_matrix)
+    m1f.pack(side=LEFT, padx=15)
+    xs.pack(side=LEFT, padx=5)
+    m2f.pack(side=LEFT, padx=15)
+    es.pack(side=LEFT, padx=5)
+    af.pack(side=LEFT, padx=15)
+    created_questions = [m1f, xs, m2f, es, af]
+
