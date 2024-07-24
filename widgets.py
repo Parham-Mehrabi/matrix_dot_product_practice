@@ -1,7 +1,8 @@
 """ my costume widgets """
-from tkinter import Label, Frame, StringVar, OptionMenu, LEFT, Tk
-from colors import BACK_GROUND_COLOR_1, CYAN_1, BLACK, RED
+from tkinter import Label, Frame, StringVar, OptionMenu, LEFT, Tk, Spinbox, IntVar
+from typing import Tuple
 import numpy as np
+from colors import BACK_GROUND_COLOR_1, CYAN_1, BLACK, RED
 
 
 class BlueLabel(Label):
@@ -96,3 +97,16 @@ class Shape:
     
 
 matrices = [Shape(j, i) for j in range(1, 6) for i in range(1, 6)]
+
+
+
+def matrices_size_frame(root: Tk) -> Tuple[Frame, IntVar]:
+    frame = Frame(root)
+    lbl = Label(frame, text="select items max size")
+    size_input_var = IntVar()
+    size_input_var.set(12)
+    size_input = Spinbox(frame, from_=2, to=99, textvariable=size_input_var)
+    lbl.pack(side=LEFT)
+    size_input.pack(side=LEFT)
+
+    return frame, size_input_var

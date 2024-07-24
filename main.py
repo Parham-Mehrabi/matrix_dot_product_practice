@@ -1,6 +1,6 @@
 from tkinter import Tk, Button, Checkbutton, BooleanVar
 from colors import BACK_GROUND_COLOR_1
-from widgets import BlueLabel, matrices_frame
+from widgets import BlueLabel, matrices_frame, matrices_size_frame
 from utils import handle_generate
 
 
@@ -17,12 +17,13 @@ def main():
     have_negative_var.set(True)
     btn_negative = Checkbutton(root, text="allow negative items", variable=have_negative_var)
     _matrices_frame, matrix_1, matrix_2 = matrices_frame(root)
-
+    size_frame, size_var = matrices_size_frame(root)
     btn_generate = Button(root, text="generate", command=lambda: handle_generate(
                                                                 m1=matrix_1.get(),
                                                                 m2=matrix_2.get(),
                                                                 zeros=have_zero_var.get(),
                                                                 negative=have_negative_var.get(),
+                                                                max_matrix_num = size_var.get(),
                                                                 main_window=root
                                                                 )
               )
@@ -30,6 +31,7 @@ def main():
     _matrices_frame.pack(pady=2)
     btn_have_zero.pack(pady=2)
     btn_negative.pack(pady=2)
+    size_frame.pack(pady=2)
     btn_generate.pack(pady=2)
     root.mainloop()
 

@@ -11,10 +11,10 @@ def validate_shapes(m1, m2):
     matrix_2 = Shape.from_str(m2)
     return matrix_1.col == matrix_2.row
 
-def create_random_matrices(m1, m2, zeros, negative) -> Tuple[np.ndarray, np.ndarray]:
-    start_range = -11 if negative else 1
-    end_range = 12
-    if start_range and zeros: start_range -= 1
+def create_random_matrices(m1, m2, zeros, max_matrix_num, negative) -> Tuple[np.ndarray, np.ndarray]:
+    start_range = (-1 * max_matrix_num) if negative else 1
+    end_range = max_matrix_num
+    if start_range == 1 and zeros: start_range -= 1
     matrix_1_shape = Shape.from_str(m1)
     matrix_2_shape = Shape.from_str(m2)
     matrix_1 = np.random.randint(start_range, end_range, size=(matrix_1_shape.to_tuple()))
@@ -24,7 +24,7 @@ def create_random_matrices(m1, m2, zeros, negative) -> Tuple[np.ndarray, np.ndar
 
 created_questions = []
 
-def handle_generate(m1, m2, zeros, negative, main_window):
+def handle_generate(m1, m2, zeros, negative, max_matrix_num, main_window):
     global created_questions
 
     if len(m1) > 5 or len(m2) > 5:
@@ -33,7 +33,7 @@ def handle_generate(m1, m2, zeros, negative, main_window):
     if not validate_shapes(m1, m2):
         return messagebox.showerror("Invalide shapes", f"you cannot multiply a matrix with shape {m1} to a matrix with shape {m2}")
     
-    matrix_1, matrix_2 = create_random_matrices(m1, m2, zeros, negative)
+    matrix_1, matrix_2 = create_random_matrices(m1, m2, zeros, max_matrix_num, negative)
 
     for widget in created_questions:
         widget.destroy()
